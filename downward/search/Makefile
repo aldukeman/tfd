@@ -23,14 +23,14 @@ TARGET_PROFILE  = $(TARGET)$(TARGET_SUFFIX_PROFILE)
 PROFILE_PARAMETERS = yY t 70 plan.soln < output
 
 CC = g++
-DEPEND = g++ -MM
+DEPEND = g++ -MM -std=c++11
 
 ## CCOPT and LINKOPT are options for compiler and linker
 ## that are used for all three targets (release, debug, and profile).
 
 CCOPT  =
 CCOPT += #-m32
-CCOPT += -Wall -W -Wno-sign-compare -ansi -pedantic -Werror
+CCOPT += -Wall -W -Wno-sign-compare -ansi -pedantic -Werror -std=c++11
 
 LINKOPT  =
 LINKOPT += #-m32

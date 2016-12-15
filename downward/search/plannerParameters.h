@@ -17,6 +17,9 @@ class PlannerParameters
       void dump() const;
 
    public:
+      //ALD
+      const char* timing_file;
+
       bool anytime_search;          ///< Perform anytime search (don't stop at first plan)
       
       int timeout_if_plan_found;          ///< Timeout if a plan was found (0 - inf).

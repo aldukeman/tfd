@@ -1,9 +1,12 @@
 #! /bin/bash
 
 export PATH=$PATH:./search
+script_name=`realpath $0`
+root=`dirname $script_name`
+plan_script=$root/plan.py
 
-if [ $# != 3 ] ; then
-    echo "Usage: plan <domainFile> <problemFile> <solutionFile>"
+if [ $# != 4 ] ; then
+    echo "Usage: plan <domainFile> <problemFile> <solutionFile> <timing>"
 else
-    ./plan.py "y+Y+a+e+r+O+1+C+1+b" $1 $2 $3
+    $plan_script "y+Y+e+O+1+C+1+b" $1 $2 $3 $4
 fi

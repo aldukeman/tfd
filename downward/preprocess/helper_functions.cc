@@ -334,7 +334,7 @@ istream& operator>>(istream &is, trans_type &tt) {
     if(!strVal.compare("s"))
         tt = start;
     else if(!strVal.compare("e"))
-        tt = end;
+        tt = trans_type::end;
     else if(!strVal.compare("c"))
         tt = compressed;
     else if(!strVal.compare("a"))
@@ -351,7 +351,7 @@ ostream& operator<<(ostream &os, const trans_type &tt) {
     case start:
         os << "s";
         break;
-    case end:
+    case trans_type::end:
         os << "e";
         break;
     case compressed:

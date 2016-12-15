@@ -24,6 +24,13 @@
 #include <ros/ros.h>
 #endif
 
+
+//********
+// ALD: for memory usage and time
+#include <sys/resource.h>
+#include <chrono>
+//********
+
 using namespace std;
 
 #include <sys/times.h>
@@ -188,6 +195,15 @@ int main(int argc, char **argv)
     //             search_time_wall, total_time_wall);
     //     fclose(timeDebugFile);
     // }
+
+
+    if(g_parameters.timing_file)
+    {
+      struct rusage r;
+      getrusage(RUSAGE_SELF, &r);
+      std::ofstream output(g_parameters.timing_file);
+      output << r.ru_maxrss;
+    }
 
     switch(search_result) {
         case SearchEngine::SOLVED_TIMEOUT:

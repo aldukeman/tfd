@@ -5,7 +5,8 @@
 #endif
 #include <stdio.h>
 
-PlannerParameters::PlannerParameters()
+PlannerParameters::PlannerParameters() :
+  timing_file(0)
 {
     // set defaults
     anytime_search = false;
@@ -263,6 +264,7 @@ void PlannerParameters::printUsage() const
     printf("  t <timeout secs> - total timeout in seconds for anytime search (when plan found)\n");
     printf("  T <timeout secs> - total timeout in seconds for anytime search (when no plan found)\n");
     printf("  m <monitor file> - monitor plan, validate a given plan\n");
+    printf("  F <file> - timing file output\n");
     printf("  g - perform greedy search (follow heuristic)\n");
     printf("  l - disable lazy evaluation (Lazy = use parent's f instead of child's)\n");
     printf("  v - disable verbose printouts\n");
@@ -291,6 +293,9 @@ bool PlannerParameters::readCmdLineParameters(int argc, char** argv)
         for (const char *c = argv[i]; *c != 0; c++) {
             if (*c == 'a') {
                 anytime_search = true;
+            } else if (*c == 'F') {
+                assert(i + 1 < argc);
+                timing_file = argv[++i];
             } else if (*c == 't') {
                 assert(i + 1 < argc);
                 timeout_if_plan_found = atoi(string(argv[++i]).c_str());

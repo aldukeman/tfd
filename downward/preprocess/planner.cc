@@ -16,15 +16,28 @@
 #include "variable.h"
 #include <iostream>
 #include <cstring>
+
+//********
+// ALD: for memory usage and time
+#include <sys/resource.h>
+#include <chrono>
+//********
+
 using namespace std;
 
 int main(int argc, const char **argv) {
 
   ifstream file("output.sas");
   //ifstream file("./output_small.sas");
+  const char* timing_file = 0;
+  std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
   if(argc==2 && strcmp(argv[1], "-eclipserun")==0) {
     cin.rdbuf(file.rdbuf());
     argc=1;
+  }
+  else if(argc == 2)
+  {
+    timing_file = argv[1];
   }
 
   vector<Variable *> variables;
@@ -91,4 +104,13 @@ int main(int argc, const char **argv) {
       operators, axioms_rel, axioms_func, successor_generator,
       transition_graphs, causal_graph, contains_quantified_conditions);
   cout << "done" << endl << endl;
+
+  if(timing_file)
+  {
+    struct rusage r;
+    getrusage(RUSAGE_SELF, &r);
+    std::chrono::system_clock::time_point end = std::chrono::system_clock::now();
+    std::ofstream output(timing_file);
+    output << r.ru_maxrss << "," << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+  }
 }

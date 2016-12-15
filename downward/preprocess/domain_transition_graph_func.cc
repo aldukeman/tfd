@@ -131,7 +131,7 @@ void DomainTransitionGraphFunc::dump() const {
     if(trans.type==start)
       cout << "  start effect" << endl;
     else
-        if(trans.type==end)
+        if(trans.type==trans_type::end)
       cout << "  end effect" << endl;
     else
       cout << "   " << "axiom" << endl;

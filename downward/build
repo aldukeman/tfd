@@ -1,10 +1,10 @@
 #! /bin/bash
 
 cd preprocess
-make release || exit 1
+make -j3 release || exit 1
 cd ..
 
 cd search
-make release || exit 1
+make -j3 release || exit 1
 cd ..
 

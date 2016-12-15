@@ -141,7 +141,7 @@ void DomainTransitionGraphSymb::read_data(istream &in)
             binary_op op;
             int duration_variable;
 
-            if(tt == start || tt == end || tt == compressed)
+            if(tt == start || tt == trans_type::end || tt == compressed)
                 in >> op >> duration_variable;
             else {
                 // axioms
